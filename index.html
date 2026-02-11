@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FormBuddy | Your Friendly Form Guide</title>
+    <!-- Google Fonts for professional look -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+Tamil:wght@400;700&family=Noto+Sans+Telugu:wght@400;700&family=Noto+Sans+Kannada:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+        <!-- Persistent Header -->
+        <header class="top-nav">
+            <div class="nav-content">
+                <div class="logo-group" onclick="showScreen('home-screen')">
+                    <h1 class="logo">FormBuddy</h1>
+                </div>
+                <div class="nav-actions">
+                    <button class="elder-btn" id="btn-elder" onclick="toggleElderMode()">👴 Elder Mode</button>
+                    <button class="home-btn" id="btn-home" onclick="showScreen('home-screen')">🏠 Home</button>
+                    <div id="lang-toggle-container" class="lang-selector">
+                        <span id="label-lang">Language:</span>
+                        <button id="lang-en" class="lang-btn active" onclick="setLanguage('en')">EN</button>
+                        <button id="lang-ta" class="lang-btn" onclick="setLanguage('ta')">தமிழ்</button>
+                        <button id="lang-hi" class="lang-btn" onclick="setLanguage('hi')">हिंदी</button>
+                        <button id="lang-te" class="lang-btn" onclick="setLanguage('te')">తెలుగు</button>
+                        <button id="lang-kn" class="lang-btn" onclick="setLanguage('kn')">ಕನ್ನಡ</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="content-area">
+
+            <!-- 1. HOME SCREEN -->
+            <section id="home-screen" class="screen active">
+                <div class="hero">
+                    <h2 id="hero-title">Don't worry, I'll help you fill the form!</h2>
+                    <p id="hero-subtitle">Upload your printed form and get easy explanations in your language.</p>
+
+                    <div class="upload-box" onclick="document.getElementById('file-upload').click()">
+                        <label for="file-upload" class="upload-label">
+                            <div class="upload-icon">📄</div>
+                            <span id="upload-instruction">Click here to Upload Form (PDF/Image)</span>
+                            <input type="file" id="file-upload" accept="image/*,.pdf"
+                                onchange="handleFileUpload(event)">
+                        </label>
+                    </div>
+
+                    <p class="privacy-note" id="privacy-note">🔒 Uploaded files are not saved.</p>
+
+                    <div class="features-brief">
+                        <div class="feat" id="feat-1">✅ Keeps Original Form</div>
+                        <div class="feat" id="feat-2">✅ Friendly Guidance</div>
+                        <div class="feat" id="feat-3">✅ 5+ Languages</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. SCANNING SCREEN -->
+            <section id="scan-screen" class="screen">
+                <div class="scanning-loader">
+                    <div class="scan-animation">
+                        <div class="page-icon">📄</div>
+                        <div class="scan-beam"></div>
+                    </div>
+                    <h3>Reading your form...</h3>
+                    <p>I'm finding all the fields for you.</p>
+                </div>
+            </section>
+
+            <!-- 2.5 SELECTION SCREEN (Dynamic Identification) -->
+            <section id="selection-screen" class="screen">
+                <div class="selection-container">
+                    <div class="analysis-status">
+                        <div class="status-icon">🔎</div>
+                        <h3 id="analysis-title">Identifying Form...</h3>
+                        <p id="analysis-subtitle">Checking fields and safety status.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. FORM GUIDE SCREEN -->
+            <section id="form-screen" class="screen">
+                <div class="progress-wrapper">
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progress-bar" style="width: 25%;"></div>
+                        <div class="progress-steps">
+                            <span class="p-step active" data-step="1">1</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="paper-form" id="paper-form-content">
+                    <!-- File Metadata Info (Purpose, Safety) -->
+                    <div id="file-analysis-info" class="analysis-info-box">
+                        <div class="info-row">
+                            <span class="info-label" id="label-purpose">Purpose:</span>
+                            <span id="file-purpose-val" class="info-value">...</span>
+                        </div>
+                        <div class="info-row-stack">
+                            <div class="info-row">
+                                <span class="info-label" id="label-safety">Safety Status:</span>
+                                <span id="file-safety-val" class="info-value">...</span>
+                            </div>
+                            <div id="safety-reason-val" class="safety-reason"></div>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic File Preview Container -->
+                    <div id="uploaded-file-preview" class="file-preview-container">
+                        <!-- New image will be injected here -->
+                    </div>
+
+                    <div class="form-header">
+                        <h2 id="dynamic-file-name">FILE NAME</h2>
+                        <p id="dynamic-file-subtitle">Document Analysis</p>
+                    </div>
+
+                    <form id="multi-step-form">
+                        <!-- Steps and Fields will be injected here -->
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <footer class="app-footer">
+            <p id="footer-text">FormBuddy - Helping you fill complex documents with ease.</p>
+        </footer>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
